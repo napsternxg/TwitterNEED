@@ -22,6 +22,7 @@ def parse_tweet_xml(tweet):
             "Mismatch. Expected: {}, Found: {}"
             ).format(data["tweet_text"][mention_data["start_idx"]:mention_data["end_idx"]], mention_data["text"])
         except AssertionError as e:
+            # in the micropost file certain start indexes are shifted by a value. This can be used to fix that. 
             for inc in [1,2,3]:
                 if data["tweet_text"][mention_data["start_idx"]+inc:mention_data["end_idx"]+inc] == mention_data["text"]:
                     mention_data["start_idx"] += inc
